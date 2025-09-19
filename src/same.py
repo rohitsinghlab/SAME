@@ -174,32 +174,14 @@ def sliding_window_matching(ref, moving, commonCT, window_size=1000, overlap=250
                             outprefix=window_outprefix)
                         
                         if window_matches.shape[0] > 0:
-                            is_left_edge = x == int(x_min)
-                            is_right_edge = x_window_max >= int(x_max)
-                            is_top_edge = y == int(y_min)
-                            is_bottom_edge = y_window_max >= int(y_max)
-
-                            # Adjust the filtering conditions based on edge cases
-                            x_min_filter = x_window_min if is_left_edge else x_window_min + overlap/2
-                            x_max_filter = x_window_max if is_right_edge else x_window_max - overlap/2
-                            y_min_filter = y_window_min if is_top_edge else y_window_min + overlap/2
-                            y_max_filter = y_window_max if is_bottom_edge else y_window_max - overlap/2
-
-                            # Apply the adjusted filters
-                            central_matches = window_matches[
-                                (window_matches['X'] >= x_min_filter) & 
-                                (window_matches['X'] < x_max_filter) & 
-                                (window_matches['Y'] >= y_min_filter) & 
-                                (window_matches['Y'] < y_max_filter)
-                            ]
-                            central_matches['window_id'] = len(x_windows) * j + i
-                            print('Central matches: ', central_matches.shape)
-                            if len(central_matches) > 0:
-                                all_matches.append(central_matches)
+                            # Add window_id to all matches (no filtering for overlap)
+                            window_matches['window_id'] = len(x_windows) * j + i
+                            print('Window matches: ', window_matches.shape)
+                            all_matches.append(window_matches)
                                 
-                                # Save intermediate results if outprefix is provided
-                                if outprefix:
-                                    pd.concat(all_matches, ignore_index=True).to_csv(output_file, index=False)
+                            # Save intermediate results if outprefix is provided
+                            if outprefix:
+                                pd.concat(all_matches, ignore_index=True).to_csv(output_file, index=False)
 
                     except Exception as e:
                         print(f'Error in window ({x}, {y}): {e}')
@@ -208,7 +190,12 @@ def sliding_window_matching(ref, moving, commonCT, window_size=1000, overlap=250
                 pbar.update(1)  # Update progress bar
             i += 1
     
-    return pd.concat(all_matches, ignore_index=True) if all_matches else pd.DataFrame()
+    # Use merge_window_matches_unique_ref to resolve overlaps and ensure one-to-one matching
+    if all_matches:
+        print(f"\nMerging {len(all_matches)} window results using maximum bipartite matching...")
+        return merge_window_matches_unique_ref(all_matches)
+    else:
+        return pd.DataFrame()
 
 
 def load_gurobi_config():
