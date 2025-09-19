@@ -1,0 +1,15 @@
+# Gurobi Environment Configuration Template
+# Copy this file to .gurobienv and replace with your actual credentials
+# DO NOT commit .gurobienv to version control - it contains sensitive information
+
+# Gurobi Web License Service Access ID
+WLSACCESSID=your-wls-access-id-here
+
+# Gurobi Web License Service Secret
+WLSSECRET=your-wls-secret-here
+
+# Gurobi License ID
+LICENSEID=your-license-id-here
+
+# Optional: You can add comments using # at the beginning of lines
+# The format is KEY=VALUE with no spaces around the equals sign
