@@ -193,7 +193,9 @@ def sliding_window_matching(ref, moving, commonCT, window_size=1000, overlap=250
     # Use merge_window_matches_unique_ref to resolve overlaps and ensure one-to-one matching
     if all_matches:
         print(f"\nMerging {len(all_matches)} window results using maximum bipartite matching...")
-        return merge_window_matches_unique_ref(all_matches)
+        outputDF =  merge_window_matches_unique_ref(all_matches)
+        outputDF.to_csv(os.path.join(outprefix, 'matches_df.csv'), index=False)
+        return outputDF
     else:
         return pd.DataFrame()
 
