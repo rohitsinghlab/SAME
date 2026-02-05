@@ -1157,16 +1157,16 @@
 <p><strong>Topology-flexible transforms</strong>: Unlike rigid registration methods, SAME allows controlled space-tearing events where spatial relationships can break (e.g., when a cell is missing in one section)</p>
 </li>
 <li>
-<p><strong>Mixed Integer Programming</strong>: Uses Gurobi MIP solver for optimal cell matching with spatial constraints via Delaunay triangulation</p>
+<p><strong>Mixed Integer Programming</strong>: Uses Gurobi MIP solver for optimal cell matching with spatial constraints via Delaunay triangulation. Leverages Gurobi MIP solver's lazy constraint feature to add constraints on-demand instead of upfront.</p>
 </li>
 <li>
-<p><strong>Metacell support</strong>: Graph simplification for handling large datasets (10,000+ cells) efficiently</p>
+<p><strong>Metacell support</strong>: Offers graph simplification for handling large datasets and for large space tears(~100k+ cells) efficiently</p>
 </li>
 <li>
-<p><strong>Lazy constraints</strong>: Memory-efficient O(n) constraint generation instead of O(n×k³)</p>
+<p><strong>Lazy constraints</strong>: Memory-efficient constraint generation instead of enumerating all O(n×k³) constraints upfront.</p>
 </li>
 <li>
-<p><strong>Sliding window</strong>: Process arbitrarily large spatial regions in overlapping windows with automatic merging</p>
+<p><strong>Sliding window</strong>: Offers processing arbitrarily large spatial regions in overlapping windows with automatic merging when regions are too large to be processed in a single step.</p>
 </li>
 </ul>
 <h2 id="quick-example">Quick Example</h2>
