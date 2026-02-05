@@ -18,7 +18,7 @@ import multiprocessing
 import networkx as nx
 
 
-def get_unprocessed_windows(moving_df, output_name, x_windows, y_windows, window_size, overlap):
+def get_unprocessed_windows(moving_df, output_name, x_windows, y_windows, window_size, overlap, cell_id_col='Cell_Num_Old'):
     """
     First check if windows exist in output, then only check cells for windows that don't exist.
     Returns a set of (i,j) tuples for windows that need processing.
@@ -29,14 +29,14 @@ def get_unprocessed_windows(moving_df, output_name, x_windows, y_windows, window
         for j, y in enumerate(y_windows):
             x_window_min, x_window_max = x, x + window_size
             y_window_min, y_window_max = y, y + window_size
-            
+
             # Store window boundaries and cells
             window_cells = moving_df[
-                (moving_df['X'] >= x_window_min) & 
-                (moving_df['X'] < x_window_max) & 
-                (moving_df['Y'] >= y_window_min) & 
+                (moving_df['X'] >= x_window_min) &
+                (moving_df['X'] < x_window_max) &
+                (moving_df['Y'] >= y_window_min) &
                 (moving_df['Y'] < y_window_max)
-            ]['Cell_Num_Old'].unique()
+            ][cell_id_col].unique()
             
             if len(window_cells) > 0:  # Only store windows with cells
                 all_windows[(i,j)] = {
@@ -99,25 +99,41 @@ def order_vertices_for_positive_area(points):
     return []
 
 
-def add_basic_constraints_optimized(model, valid_pairs, n_ref, n_aligned, max_matches, x, penalty_vars, no_match_vars):
+def add_basic_constraints_optimized(model, valid_pairs, n_ref, n_aligned, max_matches, x, penalty_vars, no_match_vars, aligned_df=None, ref_df=None, ref_metacell_match_multiplier=None):
     print("Building constraint mappings...")
     # Pre-build mappings of indices
     ref_to_pairs = defaultdict(list)    # j -> list of valid_pairs indices where jp == j
     aligned_to_pairs = defaultdict(list) # i -> list of valid_pairs indices where ip == i
-    
+
     for idx, (ip, jp) in enumerate(valid_pairs):
         ref_to_pairs[jp].append(idx)
         aligned_to_pairs[ip].append(idx)
-    
+
     # Track constraints added for each type
     n_max_match = 0
     n_one_match = 0
     n_penalty = 0
     n_no_match = 0
 
+    # Determine max_matches for ref metacells vs individual cells
+    # Individual cells (size = 1) get 1 match
+    # Metacells (size > 1) get ref_metacell_match_multiplier matches (constant for all metacells)
+    ref_has_metacells = ref_df is not None and 'size' in ref_df.columns and (ref_df['size'] > 1).any()
+    
+    if ref_has_metacells:
+        # Use provided multiplier, or default to max metacell size
+        if ref_metacell_match_multiplier is None:
+            ref_metacell_match_multiplier = int(ref_df['size'].max())
+        print(f"Ref has metacells: individual cells get 1 match, metacells get {ref_metacell_match_multiplier} matches")
+
     print("Adding max matches constraints...")
     for j, pair_indices in tqdm(ref_to_pairs.items(), total=len(ref_to_pairs)):
-        model.addConstr(quicksum(x[idx] for idx in pair_indices) <= max_matches, 
+        # Determine limit based on whether this ref is a metacell or individual cell
+        if ref_has_metacells and ref_df.iloc[j]['size'] > 1:
+            limit = ref_metacell_match_multiplier*max_matches   
+        else:
+            limit = max_matches
+        model.addConstr(quicksum(x[idx] for idx in pair_indices) <= limit,
                        name=f'max_matches_{j}')
         n_max_match += 1
     model.update()
@@ -214,7 +230,16 @@ def add_position_constraint(model, x, vertex_pairs, ref_pairs, penalty_var, ref_
         model.update()
 
 
-def filter_triangles_by_radius(points, triangles, radius, aligned_df=None, ignore_same_type_triangles=False):
+def filter_triangles_by_radius(
+    points,
+    triangles,
+    radius,
+    aligned_df=None,
+    ignore_same_type_triangles=False,
+    ensure_min_triangle_per_node=True,
+    remove_unconstrained_nodes=False,
+    min_angle_deg=15,
+):
     """
     Filter triangles to only keep those with all sides less than radius and optionally filter out same-type triangles.
     
@@ -230,15 +255,47 @@ def filter_triangles_by_radius(points, triangles, radius, aligned_df=None, ignor
         DataFrame containing cell type information
     ignore_same_type_triangles : bool, optional (default=False)
         If True, filter out triangles where all vertices have the same cell type
+    ensure_min_triangle_per_node : bool, optional (default=True)
+        Only relevant when ignore_same_type_triangles=True. If True, ensures that each
+        node retains at least one incident triangle (when possible) by selectively
+        adding back the "best" same-type triangle for nodes that would otherwise
+        have zero incident triangles after filtering.
+    remove_unconstrained_nodes : bool, optional (default=False)
+        If True, return a set of node indices that have no triangles after filtering.
+        These nodes should be removed from the optimization as they have no spatial constraints.
+    min_angle_deg : float, optional (default=15)
+        Minimum angle in degrees. Triangles with any angle smaller than this are
+        considered degenerate (too thin) and filtered out. Set to None to disable.
         
     Returns:
     --------
     filtered_triangles : list
         List of triangle indices that satisfy the radius and cell type constraints
+    unconstrained_nodes : set (only if remove_unconstrained_nodes=True)
+        Set of node indices that have no triangles after filtering
     """
+    
+    def compute_angle(p1, p2, p3):
+        """Compute angle at p2 in triangle (p1, p2, p3) in degrees."""
+        v1 = p1 - p2
+        v2 = p3 - p2
+        norm1 = np.linalg.norm(v1)
+        norm2 = np.linalg.norm(v2)
+        if norm1 == 0 or norm2 == 0:
+            return 0  # Degenerate
+        cos_angle = np.dot(v1, v2) / (norm1 * norm2)
+        cos_angle = np.clip(cos_angle, -1, 1)  # Numerical stability
+        return np.degrees(np.arccos(cos_angle))
     filtered_triangles = []
     triangles_skipped_radius = 0
+    triangles_skipped_angle = 0
     triangles_skipped_type = 0
+    nodes_with_triangle = set()
+    nodes_with_any_valid_triangle = set()  # Nodes with at least one triangle passing radius+angle checks
+
+    # Track best same-type triangle per node (score, triangle)
+    # Used only when ignore_same_type_triangles=True and ensure_min_triangle_per_node=True.
+    best_same_type_tri = {}
     
     for triangle in triangles:
         # Get the three vertices
@@ -253,22 +310,87 @@ def filter_triangles_by_radius(points, triangles, radius, aligned_df=None, ignor
         if max(side1, side2, side3) >= radius:
             triangles_skipped_radius += 1
             continue
+        
+        # Check minimum angle constraint
+        if min_angle_deg is not None:
+            angle1 = compute_angle(p2, p1, p3)  # Angle at p1
+            angle2 = compute_angle(p1, p2, p3)  # Angle at p2
+            angle3 = compute_angle(p1, p3, p2)  # Angle at p3
+            if min(angle1, angle2, angle3) < min_angle_deg:
+                triangles_skipped_angle += 1
+                continue
+        
+        # Triangle passed radius + angle checks - mark these nodes as having valid triangles
+        for v in triangle:
+            nodes_with_any_valid_triangle.add(int(v))
             
         # Check cell type constraint if requested
         if ignore_same_type_triangles and aligned_df is not None:
             vertex_types = set(aligned_df.iloc[v]['cell_type'] for v in triangle)
             if len(vertex_types) == 1:  # All vertices have same type
                 triangles_skipped_type += 1
+                if ensure_min_triangle_per_node:
+                    # Candidate to potentially re-add if this node would otherwise be unconstrained.
+                    # Prefer "small" triangles: minimize perimeter (less distortion).
+                    score = float(side1 + side2 + side3)
+                    for v in triangle:
+                        prev = best_same_type_tri.get(int(v))
+                        if prev is None or score < prev[0]:
+                            best_same_type_tri[int(v)] = (score, triangle)
                 continue
                 
         filtered_triangles.append(triangle)
+        for v in triangle:
+            nodes_with_triangle.add(int(v))
     
     print(f"\nTriangle filtering summary:")
     print(f"Total triangles: {len(triangles)}")
     print(f"Triangles skipped (radius): {triangles_skipped_radius}")
+    if min_angle_deg is not None:
+        print(f"Triangles skipped (min_angle < {min_angle_deg}°): {triangles_skipped_angle}")
     if ignore_same_type_triangles:
         print(f"Triangles skipped (same type): {triangles_skipped_type}")
     print(f"Triangles kept: {len(filtered_triangles)}")
+
+    # Identify truly unconstrained nodes (no triangles AT ALL, not even same-type)
+    # These are nodes that lost all triangles during window remapping
+    n_points = len(points)
+    truly_unconstrained_nodes = set(range(n_points)) - nodes_with_any_valid_triangle
+    
+    if remove_unconstrained_nodes and truly_unconstrained_nodes:
+        print(f"Found {len(truly_unconstrained_nodes)} nodes with no triangles after remapping (will be removed from optimization)")
+    
+    # Ensure at least one triangle per node when ignoring same-type triangles.
+    # This adds back same-type triangles for nodes that have them but no mixed-type triangles.
+    if (
+        ignore_same_type_triangles
+        and ensure_min_triangle_per_node
+        and aligned_df is not None
+    ):
+        missing_nodes = [i for i in range(n_points) if i not in nodes_with_triangle and i not in truly_unconstrained_nodes]
+        if missing_nodes:
+            added = 0
+            added_set = set(tuple(map(int, tri)) for tri in filtered_triangles)
+            for i in missing_nodes:
+                cand = best_same_type_tri.get(int(i))
+                if cand is None:
+                    continue
+                tri = cand[1]
+                tri_key = tuple(map(int, tri))
+                if tri_key not in added_set:
+                    filtered_triangles.append(tri)
+                    added_set.add(tri_key)
+                    added += 1
+            if added > 0:
+                print(
+                    f"Added back {added} same-type triangles to ensure >=1 triangle per node "
+                    f"(covered {sum(1 for i in missing_nodes if i in best_same_type_tri)} of {len(missing_nodes)} uncovered nodes)."
+                )
+                print(f"Final triangles kept: {len(filtered_triangles)}")
+    
+    # Return unconstrained nodes if requested
+    if remove_unconstrained_nodes:
+        return filtered_triangles, truly_unconstrained_nodes
     
     return filtered_triangles
 
@@ -441,6 +563,7 @@ def add_spatial_constraints_triangle_based(model, valid_pairs_map, x, aligned_df
                     all_constraints.append(z >= x[idx1] + x[idx2] + x[idx3] - 2)
                     
                     # Areas must have same sign (or pay penalty)
+                    # Zero area (collinear points) is not penalized - only actual flips
                     all_constraints.append(aligned_area * ref_area * z >= -area_penalty_var)
     
     # Add all constraints at once
@@ -566,23 +689,23 @@ def load_matching_results(outprefix):
     return var_out, aligned_df, ref_df, matches_df
 
 
-def merge_window_matches_unique_ref(matches_list):
+def merge_window_matches_unique_ref(matches_list, cell_id_col='Cell_Num_Old'):
     """Merge per-window matches and enforce one-to-one matching maximizing aligned count.
 
     This function concatenates a list of per-window match DataFrames and returns
     a single DataFrame with no duplicates on either endpoint: each
-    `Aligned_Cell_Num_Old` and each `Ref_Cell_Num_Old` appears at most once.
+    `Aligned_{cell_id_col}` and each `Ref_{cell_id_col}` appears at most once.
 
-    It maximizes the number of unique `Aligned_Cell_Num_Old` kept by computing a
-    maximum-cardinality bipartite matching between `Aligned_Cell_Num_Old` and
-    `Ref_Cell_Num_Old`. For duplicate occurrences of the same (aligned, ref)
+    It maximizes the number of unique `Aligned_{cell_id_col}` kept by computing a
+    maximum-cardinality bipartite matching between `Aligned_{cell_id_col}` and
+    `Ref_{cell_id_col}`. For duplicate occurrences of the same (aligned, ref)
     pair across windows, it prefers rows with `filtered_violation == False` and
     then smaller `window_id`.
 
     Required columns in each DataFrame:
     - 'window_id'
-    - 'Aligned_Cell_Num_Old'
-    - 'Ref_Cell_Num_Old'
+    - f'Aligned_{cell_id_col}'
+    - f'Ref_{cell_id_col}'
     - 'X'
     - 'Y'
     - 'filtered_violation' (if missing, treated as True)
@@ -591,6 +714,8 @@ def merge_window_matches_unique_ref(matches_list):
     ----------
     matches_list : list[pd.DataFrame]
         List of per-window matches DataFrames.
+    cell_id_col : str, default='Cell_Num_Old'
+        Name of the cell ID column to use for matching.
 
     Returns
     -------
@@ -602,10 +727,13 @@ def merge_window_matches_unique_ref(matches_list):
 
     merged_df = pd.concat(matches_list, ignore_index=True)
 
+    aligned_col = f'Aligned_{cell_id_col}'
+    ref_col = f'Ref_{cell_id_col}'
+
     required_cols = [
         'window_id',
-        'Aligned_Cell_Num_Old',
-        'Ref_Cell_Num_Old',
+        aligned_col,
+        ref_col,
         'X',
         'Y',
         'filtered_violation'
@@ -628,13 +756,13 @@ def merge_window_matches_unique_ref(matches_list):
         by=['filtered_violation', 'window_id'], ascending=[True, True], kind='mergesort'
     )
     merged_df = merged_df.drop_duplicates(
-        subset=['Aligned_Cell_Num_Old', 'Ref_Cell_Num_Old'], keep='first'
+        subset=[aligned_col, ref_col], keep='first'
     )
 
     # Build bipartite graph (Aligned -> list of Ref)
 
-    aligned_vals = merged_df['Aligned_Cell_Num_Old'].values
-    ref_vals = merged_df['Ref_Cell_Num_Old'].values
+    aligned_vals = merged_df[aligned_col].values
+    ref_vals = merged_df[ref_col].values
 
     # Map node ids to 0..n-1 indices for arrays
     unique_aligned = sorted(pd.unique(aligned_vals))

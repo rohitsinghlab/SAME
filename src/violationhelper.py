@@ -38,14 +38,15 @@ def verify_spatial_preservation(aligned_df, ref_df, matches_df, triangle_info, t
     match_lookup = {row['aligned_idx']: row['ref_idx'] 
                    for _, row in matches_df.iterrows()}
     
-    # Create direct lookups for coordinates to avoid iloc
+    # Create direct lookups for coordinates using positional indices (iloc)
+    # triangle_info vertices are positional indices into aligned_df
     aligned_coords = {
-        idx: {'X': row['X'], 'Y': row['Y']} 
-        for idx, row in aligned_df.reset_index(drop=True).iterrows()
+        idx: {'X': aligned_df.iloc[idx]['X'], 'Y': aligned_df.iloc[idx]['Y']} 
+        for idx in range(len(aligned_df))
     }
     ref_coords = {
-        idx: {'X': row['X'], 'Y': row['Y']} 
-        for idx, row in ref_df.reset_index(drop=True).iterrows()
+        idx: {'X': ref_df.iloc[idx]['X'], 'Y': ref_df.iloc[idx]['Y']} 
+        for idx in range(len(ref_df))
     }
     
     # Process each triangle
