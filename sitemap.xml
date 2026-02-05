@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://github.com/singhlab/SAME/</loc>
+         <loc>https://github.com/rohitsinghlab/SAME/</loc>
          <lastmod>2026-02-05</lastmod>
     </url>
     <url>
-         <loc>https://github.com/singhlab/SAME/installation/</loc>
+         <loc>https://github.com/rohitsinghlab/SAME/installation/</loc>
          <lastmod>2026-02-05</lastmod>
     </url>
     <url>
-         <loc>https://github.com/singhlab/SAME/quickstart/</loc>
+         <loc>https://github.com/rohitsinghlab/SAME/quickstart/</loc>
          <lastmod>2026-02-05</lastmod>
     </url>
     <url>
-         <loc>https://github.com/singhlab/SAME/api/helpers/</loc>
+         <loc>https://github.com/rohitsinghlab/SAME/api/helpers/</loc>
          <lastmod>2026-02-05</lastmod>
     </url>
     <url>
-         <loc>https://github.com/singhlab/SAME/api/metacell_utils/</loc>
+         <loc>https://github.com/rohitsinghlab/SAME/api/metacell_utils/</loc>
          <lastmod>2026-02-05</lastmod>
     </url>
     <url>
-         <loc>https://github.com/singhlab/SAME/api/same/</loc>
+         <loc>https://github.com/rohitsinghlab/SAME/api/same/</loc>
          <lastmod>2026-02-05</lastmod>
     </url>
     <url>
-         <loc>https://github.com/singhlab/SAME/concepts/algorithm/</loc>
+         <loc>https://github.com/rohitsinghlab/SAME/concepts/algorithm/</loc>
          <lastmod>2026-02-05</lastmod>
     </url>
     <url>
-         <loc>https://github.com/singhlab/SAME/concepts/metacells/</loc>
+         <loc>https://github.com/rohitsinghlab/SAME/concepts/metacells/</loc>
          <lastmod>2026-02-05</lastmod>
     </url>
     <url>
-         <loc>https://github.com/singhlab/SAME/concepts/parameters/</loc>
+         <loc>https://github.com/rohitsinghlab/SAME/concepts/parameters/</loc>
          <lastmod>2026-02-05</lastmod>
     </url>
     <url>
-         <loc>https://github.com/singhlab/SAME/tutorials/basic_usage/</loc>
+         <loc>https://github.com/rohitsinghlab/SAME/tutorials/basic_usage/</loc>
          <lastmod>2026-02-05</lastmod>
     </url>
     <url>
-         <loc>https://github.com/singhlab/SAME/tutorials/large_datasets/</loc>
+         <loc>https://github.com/rohitsinghlab/SAME/tutorials/large_datasets/</loc>
          <lastmod>2026-02-05</lastmod>
     </url>
     <url>
-         <loc>https://github.com/singhlab/SAME/tutorials/synthetic/</loc>
+         <loc>https://github.com/rohitsinghlab/SAME/tutorials/synthetic/</loc>
          <lastmod>2026-02-05</lastmod>
     </url>
 </urlset>
