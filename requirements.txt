@@ -1,0 +1,23 @@
+# Core dependencies
+numpy>=1.20.0
+pandas>=1.3.0
+scipy>=1.7.0
+gurobipy>=10.0.0
+tqdm>=4.60.0
+networkx>=2.6.0
+scikit-learn>=1.0.0
+
+# Geometry (optional but recommended)
+alphashape>=1.3.0
+shapely>=2.0.0
+
+# Data download (for notebooks)
+pooch>=1.6.0
+
+# Visualization (optional)
+matplotlib>=3.4.0
+
+# Development dependencies
+# pytest>=7.0.0
+# black>=22.0.0
+# isort>=5.10.0
