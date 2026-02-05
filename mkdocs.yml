@@ -1,8 +1,8 @@
 site_name: SAME Documentation
 site_description: Spatial Alignment for Multi-modal Experiments
-site_url: https://github.com/singhlab/SAME
-repo_url: https://github.com/singhlab/SAME
-repo_name: singhlab/SAME
+site_url: https://github.com/rohitsinghlab/SAME
+repo_url: https://github.com/rohitsinghlab/SAME
+repo_name: rohitsinghlab/SAME
 
 theme:
   name: material

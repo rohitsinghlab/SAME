@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://singhlab.github.io/SAME/)
+[![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://rohitsinghlab.github.io/SAME/)
 
 ![SAME Overview](figs/SAME_overview.jpg)
 
@@ -22,7 +22,7 @@
 
 ```bash
 # Clone repository
-git clone https://github.com/singhlab/SAME.git
+git clone https://github.com/rohitsinghlab/SAME.git
 cd SAME
 
 # Install with pip
@@ -76,12 +76,12 @@ individual_matches = unpack_metacell_matches(matches, mc_aligned, ref_df)
 
 ## Documentation
 
-Full documentation available at: https://singhlab.github.io/SAME/
+Full documentation available at: https://rohitsinghlab.github.io/SAME/
 
-- [Installation Guide](https://singhlab.github.io/SAME/installation/)
-- [Quick Start Tutorial](https://singhlab.github.io/SAME/quickstart/)
-- [Algorithm Overview](https://singhlab.github.io/SAME/concepts/algorithm/)
-- [API Reference](https://singhlab.github.io/SAME/api/same/)
+- [Installation Guide](https://rohitsinghlab.github.io/SAME/installation/)
+- [Quick Start Tutorial](https://rohitsinghlab.github.io/SAME/quickstart/)
+- [Algorithm Overview](https://rohitsinghlab.github.io/SAME/concepts/algorithm/)
+- [API Reference](https://rohitsinghlab.github.io/SAME/api/same/)
 
 ## Examples
 
@@ -110,4 +110,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-For questions or issues, please open a [GitHub Issue](https://github.com/singhlab/SAME/issues).
+For questions or issues, please open a [GitHub Issue](https://github.com/rohitsinghlab/SAME/issues).

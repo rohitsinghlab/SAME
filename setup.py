@@ -11,10 +11,10 @@ setup(
     description="Spatial Alignment for Multi-modal Experiments",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/singhlab/SAME",
+    url="https://github.com/rohitsinghlab/SAME",
     project_urls={
-        "Bug Tracker": "https://github.com/singhlab/SAME/issues",
-        "Documentation": "https://singhlab.github.io/SAME/",
+        "Bug Tracker": "https://github.com/rohitsinghlab/SAME/issues",
+        "Documentation": "https://rohitsinghlab.github.io/SAME/",
     },
     packages=find_packages(),
     install_requires=[

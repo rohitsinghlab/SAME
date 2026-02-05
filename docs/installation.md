@@ -10,7 +10,7 @@
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/singhlab/SAME.git
+git clone https://github.com/rohitsinghlab/SAME.git
 cd SAME
 pip install -e .
 ```
