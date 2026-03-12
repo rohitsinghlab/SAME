@@ -159,4 +159,4 @@ aligned_with_same.to_csv('results/aligned_with_same_coords.csv', index=False)
 ## Next Steps
 
 - [Large Datasets Tutorial](large_datasets.md) - Handle 10,000+ cells
-- [Synthetic Benchmarks](synthetic.md) - Validate with ground truth
+- [Paper Figures](paper_figures.md) - Reproduce figures from the paper
