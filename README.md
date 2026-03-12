@@ -76,19 +76,19 @@ individual_matches = unpack_metacell_matches(matches, mc_aligned, ref_df)
 
 ## Documentation
 
-Full documentation available at: https://rohitsinghlab.github.io/SAME/
+Full documentation: **https://rohitsinghlab.github.io/SAME/**
 
-- [Installation Guide](https://rohitsinghlab.github.io/SAME/installation/)
-- [Quick Start Tutorial](https://rohitsinghlab.github.io/SAME/quickstart/)
-- [Algorithm Overview](https://rohitsinghlab.github.io/SAME/concepts/algorithm/)
-- [API Reference](https://rohitsinghlab.github.io/SAME/api/same/)
+- [Installation](https://rohitsinghlab.github.io/SAME/installation/) · [Quick Start](https://rohitsinghlab.github.io/SAME/quickstart/) · [Algorithm](https://rohitsinghlab.github.io/SAME/concepts/algorithm/) · [API Reference](https://rohitsinghlab.github.io/SAME/api/same/)
+- [**Paper Figures**](https://rohitsinghlab.github.io/SAME/tutorials/paper_figures/) — interactive notebooks reproducing figures from the paper
 
-## Examples
+## Reproducing Paper Figures
 
-See the `examples/` directory for Jupyter notebooks:
+Each dataset has a self-contained folder in `examples/` with data, pre-computed results, a Jupyter notebook, and shell scripts to re-run from scratch.
 
-- `elastic_grid.ipynb` - Basic diffeomorphic grid example
-- `space_tearing_grid.ipynb` - Space-tearing demonstration
+| Dataset | Paper Figures | Notebook |
+|---------|--------------|----------|
+| [Synthetic](examples/synthetic/) | Fig 2, S1 | [reproduce_figures.ipynb](examples/synthetic/reproduce_figures.ipynb) |
+| [ISS Heart](examples/heart/) | Fig 3, S4–S7 | [reproduce_figures.ipynb](examples/heart/reproduce_figures.ipynb) |
 
 ## Data Format
 
