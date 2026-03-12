@@ -7511,7 +7511,7 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a6e9d410">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=059d914d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7526,12 +7526,54 @@ The optimization results are pre-computed; this notebook loads them and generate
 <li>8 cell types: Atrial/Ventricular cardiomyocytes, Endothelium, Epicardium, Fibroblast, Smooth muscle cells, Schwan progenitors</li>
 </ul>
 <p><strong>Main result</strong>: dp=10, MS=1, knn=8 → 71.6% cell type accuracy, &lt;5% triangle violations</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>delaunay_penalty</code></td>
+<td><strong>10</strong></td>
+</tr>
+<tr>
+<td><code>window_size</code></td>
+<td>4000</td>
+</tr>
+<tr>
+<td><code>overlap</code></td>
+<td>100</td>
+</tr>
+<tr>
+<td><code>max_matches</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td><code>radius</code> / <code>knn</code></td>
+<td>50 / 8</td>
+</tr>
+<tr>
+<td><code>metacell_size</code></td>
+<td>1 (also 3, 7 in sweep)</td>
+</tr>
+<tr>
+<td><code>lazy_constraints</code></td>
+<td>True</td>
+</tr>
+<tr>
+<td><code>ignore_same_type_triangles</code></td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Note</strong>: Fig 3d-f (method comparisons) require benchmarking baselines from a separate machine — deferred.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f1a199b6">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=81defd16">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7541,7 +7583,7 @@ The optimization results are pre-computed; this notebook loads them and generate
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a85a1b91">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=265573ab">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7646,7 +7688,7 @@ The optimization results are pre-computed; this notebook loads them and generate
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=13085637">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4f57291a">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7717,7 +7759,7 @@ Name: count, dtype: int64
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7c652f2a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9fa8d620">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7770,7 +7812,7 @@ Name: count, dtype: int64
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0a225285">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b9276e90">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7781,7 +7823,7 @@ Each point is one SAME run. Larger markers = higher penalty.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a06f2e47">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=fcb62495">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7869,7 +7911,7 @@ Each point is one SAME run. Larger markers = higher penalty.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=018681fa">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5c8a74ec">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7879,7 +7921,7 @@ Each point is one SAME run. Larger markers = higher penalty.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=60cc3139">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=c2b414c4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7947,7 +7989,7 @@ Each point is one SAME run. Larger markers = higher penalty.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=abc102be">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e8e1e30b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7958,7 +8000,7 @@ Noise level 0 = original labels, 1 = fully random.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1e38604c">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e54bc4bf">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8033,7 +8075,7 @@ Noise level 0 = original labels, 1 = fully random.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=fc7ba356">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=740b384b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8087,7 +8129,7 @@ Noise level 0 = original labels, 1 = fully random.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=eb3f9b70">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=84e871ea">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8097,7 +8139,7 @@ Noise level 0 = original labels, 1 = fully random.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1b75171d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1b43cb43">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8143,7 +8185,7 @@ Noise level 0 = original labels, 1 = fully random.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=fbabff5f">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1d27a95e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8193,7 +8235,7 @@ Noise level 0 = original labels, 1 = fully random.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b8ef52c2">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=190cfb0e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8203,7 +8245,7 @@ Noise level 0 = original labels, 1 = fully random.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d05ff342">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=93d4462d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8253,7 +8295,7 @@ Noise level 0 = original labels, 1 = fully random.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4653ce48">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5bf02ac4">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8263,7 +8305,7 @@ Noise level 0 = original labels, 1 = fully random.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=87df9f58">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=24ad2506">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8385,7 +8427,7 @@ Noise level 0 = original labels, 1 = fully random.</p>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3b466f07">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=acc1ded6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
