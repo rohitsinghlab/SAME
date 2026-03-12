@@ -1,10 +1,7 @@
-# ISS Heart — Serial Section Alignment
+# ISS Heart (Fig 3, S4–S7)
 
 Reproduces **Fig 3** (a–c), **Fig S4**, **Fig S5**, **Fig S6**, **Fig S7** from the paper.
 
-## Notebook
-
-- **[Interactive HTML](heart_benchmark.html)** — rendered notebook with all outputs
 - **Source**: [`examples/heart/reproduce_figures.ipynb`](https://github.com/rohitsinghlab/SAME/tree/main/examples/heart/reproduce_figures.ipynb)
 
 ## Dataset
@@ -64,6 +61,8 @@ bash run_robustness.sh
 | `FigS6_time_heatmap.svg` | Fig S6c |
 | `FigS7_nodes_violating.svg` | Fig S7 |
 
-## Deferred
+*Fig 3d-f (method comparisons vs GPSA, PASTE2, STAlign, etc.) require benchmarking baselines — deferred.*
 
-Fig 3d-f (method comparisons vs GPSA, PASTE2, STAlign, etc.) require benchmarking baselines from a separate machine.
+## Interactive Notebook
+
+<iframe src="heart_benchmark.html" width="100%" height="800px" style="border:none;"></iframe>

@@ -1,12 +1,7 @@
-# Synthetic 4-Quadrant Benchmark
+# Synthetic Benchmark (Fig 2, S1)
 
 Reproduces **Fig 2** and **Fig S1** from the paper.
 
-## Notebook
-
-The full reproducible notebook is available here:
-
-- **[Interactive HTML](synthetic_benchmark.html)** — rendered notebook with all outputs
 - **Source**: [`examples/synthetic/reproduce_figures.ipynb`](https://github.com/rohitsinghlab/SAME/tree/main/examples/synthetic/reproduce_figures.ipynb)
 
 ## Dataset
@@ -60,3 +55,7 @@ bash run_same.sh 25     # alternative penalty
 | `FigS1c_space_tearing.svg` | Fig S1c |
 | `FigS1d_noisy_probabilities.svg` | Fig S1d |
 | `FigS_delaunay_triangulation.svg` | Supplementary |
+
+## Interactive Notebook
+
+<iframe src="synthetic_benchmark.html" width="100%" height="800px" style="border:none;"></iframe>
