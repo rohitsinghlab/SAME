@@ -71,9 +71,7 @@ nav:
   - Tutorials:
     - Basic Usage: tutorials/basic_usage.md
     - Large Datasets: tutorials/large_datasets.md
-  - Paper Figures:
-    - Synthetic (Fig 2, S1): tutorials/synthetic.md
-    - ISS Heart (Fig 3, S4-S7): tutorials/heart.md
+  - Paper Figures: tutorials/paper_figures.md
   - API Reference:
     - Core Functions: api/same.md
     - Metacell Utilities: api/metacell_utils.md
