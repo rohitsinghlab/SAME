@@ -15,3 +15,10 @@ Human embryonic heart, ~3160 cells, 8 cell types. Includes parameter sweeps, noi
 
 - [**Interactive Notebook**](https://rohitsinghlab.github.io/SAME/tutorials/heart_benchmark.html){:target="_blank"}
 - [Source notebook](https://github.com/rohitsinghlab/SAME/tree/main/examples/heart/reproduce_figures.ipynb)
+
+## MERSCOPE Tongue — Protein + RNA (Fig 4, S9–S14)
+
+Human tongue, 3608 RNA cells (MERSCOPE) + 4671 protein cells (PCF), 5 cell types. Cross-modal alignment with matrixplot and differential expression.
+
+- [**Interactive Notebook**](https://rohitsinghlab.github.io/SAME/tutorials/tongue_benchmark.html){:target="_blank"}
+- [Source notebook](https://github.com/rohitsinghlab/SAME/tree/main/examples/tongue/reproduce_figures.ipynb)

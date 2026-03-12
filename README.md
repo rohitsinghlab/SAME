@@ -89,6 +89,7 @@ Each dataset has a self-contained folder in `examples/` with data, pre-computed 
 |---------|--------------|----------|
 | [Synthetic](examples/synthetic/) | Fig 2, S1 | [reproduce_figures.ipynb](examples/synthetic/reproduce_figures.ipynb) |
 | [ISS Heart](examples/heart/) | Fig 3, S4–S7 | [reproduce_figures.ipynb](examples/heart/reproduce_figures.ipynb) |
+| [Tongue (Protein+RNA)](examples/tongue/) | Fig 4, S9–S14 | [reproduce_figures.ipynb](examples/tongue/reproduce_figures.ipynb) |
 
 ## Data Format
 
