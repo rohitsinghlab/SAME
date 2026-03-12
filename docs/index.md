@@ -10,13 +10,13 @@ SAME is a computational framework for aligning and integrating spatial omics dat
 
 - **Topology-flexible transforms**: Unlike rigid registration methods, SAME allows controlled space-tearing events where spatial relationships can break (e.g., when a cell is missing in one section)
 
-- **Mixed Integer Programming**: Uses Gurobi MIP solver for optimal cell matching with spatial constraints via Delaunay triangulation
+- **Mixed Integer Programming**: Uses Gurobi MIP solver for optimal cell matching with spatial constraints via Delaunay triangulation. Leverages Gurobi MIP solver's lazy constraint feature to add constraints on-demand instead of upfront.
 
-- **Metacell support**: Graph simplification for handling large datasets (10,000+ cells) efficiently
+- **Metacell support**: Offers graph simplification for handling large datasets and for large space tears(~100k+ cells) efficiently
 
-- **Lazy constraints**: Memory-efficient O(n) constraint generation instead of O(n×k³)
+- **Lazy constraints**: Memory-efficient constraint generation instead of enumerating all O(n×k³) constraints upfront.
 
-- **Sliding window**: Process arbitrarily large spatial regions in overlapping windows with automatic merging
+- **Sliding window**: Offers processing arbitrarily large spatial regions in overlapping windows with automatic merging when regions are too large to be processed in a single step.
 
 ## Quick Example
 
