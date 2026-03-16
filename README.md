@@ -83,7 +83,7 @@ Full documentation: **https://rohitsinghlab.github.io/SAME/**
 
 ## Reproducing Paper Figures
 
-Each dataset has a self-contained folder in `examples/` with data, pre-computed results, a Jupyter notebook, and shell scripts to re-run from scratch.
+Each dataset has a self-contained folder in `examples/` with a Jupyter notebook and shell scripts to re-run from scratch. **Download the data and pre-computed results from [Zenodo](https://zenodo.org/records/19056915)** and extract into `examples/`.
 
 | Dataset | Paper Figures | Notebook |
 |---------|--------------|----------|
