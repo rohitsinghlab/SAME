@@ -22,3 +22,10 @@ Human tongue, 3608 RNA cells (MERSCOPE) + 4671 protein cells (PCF), 5 cell types
 
 - [**Interactive Notebook**](https://rohitsinghlab.github.io/SAME/tutorials/tongue_benchmark.html){:target="_blank"}
 - [Source notebook](https://github.com/rohitsinghlab/SAME/tree/main/examples/tongue/reproduce_figures.ipynb)
+
+## LUAD33 — Protein + Xenium (Fig 5, S15–S19)
+
+Lung adenocarcinoma, ~94K PCF protein + ~100K Xenium RNA cells, 5 cell types. Penalty sweep, cross-modal matrixplot, and T cell exhaustion analysis.
+
+- [**Interactive Notebook**](https://rohitsinghlab.github.io/SAME/tutorials/luad_benchmark.html){:target="_blank"}
+- [Source notebook](https://github.com/rohitsinghlab/SAME/tree/main/examples/luad/reproduce_figures.ipynb)
