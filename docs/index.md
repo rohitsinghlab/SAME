@@ -1,6 +1,6 @@
 # SAME
 
-**Spatial Alignment of Multimodal Expression**
+**Spatial Alignment of Multimodal Experiments**
 
 ![SAME Overview](assets/SAME_overview.jpg)
 
