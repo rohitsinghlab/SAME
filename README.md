@@ -106,6 +106,10 @@ If you use SAME in your research, please cite:
 
 > Aditya Pratapa, Siavash Mansouri, Nadezhda Nikulina, Bruno Matuck, Marc A. Schneider, Kevin Matthew Byrd, Rajkumar Savai, Purushothama Rao Tata, and Rohit Singh. "SAME: Topology-flexible transforms enable robust integration of multimodal spatial omics." bioRxiv (2025): 2025-07. https://doi.org/10.1101/2025.07.12.664419
 
+## Zenodo link for datasets:
+
+The datasets to reproduce the figures can be found [here](https://zenodo.org/records/19056915).
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -113,3 +117,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 
 For questions or issues, please open a [GitHub Issue](https://github.com/rohitsinghlab/SAME/issues).
+
+
+
