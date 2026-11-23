@@ -55,14 +55,20 @@ the original working folders. Each notebook's metadata records its Python versio
 | Method | Version | Heart (RNA–RNA) | Tongue (protein–RNA) |
 |---|---|---|---|
 | CAST | 0.4 | [`CAST.ipynb`](heart/methods/CAST.ipynb) | [`CAST.ipynb`](tongue/methods/CAST.ipynb) |
-| GPSA | 0.8 | not included (aligned output in the data archive) | [`GPSA.ipynb`](tongue/methods/GPSA.ipynb) |
-| PASTE2 | 1.0.1 | not included (aligned output in the data archive) | [`PASTE2.ipynb`](tongue/methods/PASTE2.ipynb) |
+| GPSA | 0.8 | [`GPSA.ipynb`](heart/methods/GPSA.ipynb) | [`GPSA.ipynb`](tongue/methods/GPSA.ipynb) |
+| PASTE2 | 1.0.1 | [`PASTE2.ipynb`](heart/methods/PASTE2.ipynb) | [`PASTE2.ipynb`](tongue/methods/PASTE2.ipynb) |
 | SPACEL | 1.1.8 | [`SPACEL.ipynb`](heart/methods/SPACEL.ipynb) | [`SPACEL.ipynb`](tongue/methods/SPACEL.ipynb) |
 | ST-GEARS | 1.0.0 | [`ST-GEARS.ipynb`](heart/methods/ST-GEARS.ipynb) | [`ST-GEARS.ipynb`](tongue/methods/ST-GEARS.ipynb) |
 | STAlign (STalign) | 1.0 | [`STAlign.ipynb`](heart/methods/STAlign.ipynb) | [`STAlign.ipynb`](tongue/methods/STAlign.ipynb) |
 | STAligner | 1.0.0 | [`STAligner.ipynb`](heart/methods/STAligner.ipynb) | [`STAligner.ipynb`](tongue/methods/STAligner.ipynb) |
 | STIM | 0.3.0 | [`STIM.ipynb`](heart/methods/STIM.ipynb) | not included: failed in the protein–RNA setting |
 
+* Heart output file names: `GPSA.ipynb` writes `heart_spot_moving_gpsa.h5ad` / `heart_spot_ref_gpsa.h5ad` (archived as
+  `query_GPSA.h5ad` / `ref_GPSA.h5ad`; aligned positions in `obs['new_X', 'new_Y']`), and `PASTE2.ipynb` writes
+  `rep1AD_paste2_valisStart_1120.h5ad` / `rep2AD_paste2_valisStart_1120.h5ad` (archived as `query_PASTE2.h5ad` /
+  `ref_PASTE2.h5ad`). The cells of `PASTE2.ipynb` were run out of order; the scored result comes from
+  `partial_pairwise_align(queryAD, refAD, s=0.99)` and the two `write_h5ad` calls after it. Its other `write_h5ad`
+  calls save variants that were not scored.
 * Tongue inputs: [`STAlign_preprocess.ipynb`](tongue/methods/STAlign_preprocess.ipynb) builds the shared
   initial-registration coordinates (`New_X`, `New_Y`) and the cell neighborhoods, and exports the expression tables
   read by `GPSA.ipynb` (it also contains a first STAlign run; the scored STAlign result is from `STAlign.ipynb`);
