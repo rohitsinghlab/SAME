@@ -22,7 +22,7 @@ benchmarks/
 
 ## Reproducing the figures
 
-1. Download `SAME_benchmarks_data.zip` from the SAME Zenodo record, <https://zenodo.org/records/19056915>
+1. Download `SAME_benchmarks_data.zip` from the SAME Zenodo record, <https://doi.org/10.5281/zenodo.19056914>
    (latest version), and unzip it here, in `benchmarks/`. It contains every method's aligned output
    (`heart/data/`, `tongue/data/`).
 2. For the tongue notebook, also download `SAME_data.zip` from the same record and unzip it in `examples/`

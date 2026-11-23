@@ -18,7 +18,7 @@ Human embryonic heart, ~3160 cells, 8 cell types. Includes parameter sweeps, noi
 
 ## ISS Heart — Comparison with Other Methods (Fig 3d–f, S8)
 
-SAME against CAST, GPSA, PASTE2, SPACEL, ST-GEARS, STAlign, STAligner and STIM, all starting from the same image-based alignment. Cell type and cell neighborhood matches per method. Aligned outputs: `SAME_benchmarks_data.zip` on [Zenodo](https://zenodo.org/records/19056915).
+SAME against CAST, GPSA, PASTE2, SPACEL, ST-GEARS, STAlign, STAligner and STIM, all starting from the same image-based alignment. Cell type and cell neighborhood matches per method. Aligned outputs: `SAME_benchmarks_data.zip` on [Zenodo](https://doi.org/10.5281/zenodo.19056914).
 
 - [**Interactive Notebook**](https://rohitsinghlab.github.io/SAME/tutorials/heart_compare_methods.html){:target="_blank"}
 - [Source notebook](https://github.com/rohitsinghlab/SAME/tree/main/benchmarks/heart/compare_methods.ipynb)
@@ -33,7 +33,7 @@ Human tongue, 3608 RNA cells (MERSCOPE) + 4671 protein cells (PCF), 5 cell types
 
 ## MERSCOPE Tongue — Comparison with Other Methods (Fig 4g–i, S12, S13)
 
-SAME against CAST, GPSA, PASTE2, SPACEL, ST-GEARS, STAlign and STAligner on protein–RNA alignment, all starting from the same image-based alignment. Cell type and cell neighborhood matches, and predicted RNA expression per PCF cell type. Aligned outputs: `SAME_benchmarks_data.zip` on [Zenodo](https://zenodo.org/records/19056915).
+SAME against CAST, GPSA, PASTE2, SPACEL, ST-GEARS, STAlign and STAligner on protein–RNA alignment, all starting from the same image-based alignment. Cell type and cell neighborhood matches, and predicted RNA expression per PCF cell type. Aligned outputs: `SAME_benchmarks_data.zip` on [Zenodo](https://doi.org/10.5281/zenodo.19056914).
 
 - [**Interactive Notebook**](https://rohitsinghlab.github.io/SAME/tutorials/tongue_compare_methods.html){:target="_blank"}
 - [Source notebook](https://github.com/rohitsinghlab/SAME/tree/main/benchmarks/tongue/compare_methods.ipynb)
